@@ -1,13 +1,16 @@
-const express = require("express");
-const mongoose = require("mongoose");
-require("dotenv").config();
+import express from "express";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import UserRouter from "./Routes/UserRoutes.js";
+dotenv.config();
 
 const app = express();
 
 //Middleware
-app.use("/", (req, res, next) => {
-    res.send("It is working");
-})
+app.get('/',(req, res)=> res.send('API is working!'));
+
+app.use(express.json());
+app.use('/api/users',UserRouter)
 
 mongoose.connect(process.env.MONGO_URl)
 .then(()=>
