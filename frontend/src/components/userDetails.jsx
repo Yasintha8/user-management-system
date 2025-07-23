@@ -96,6 +96,15 @@ const UserDetails = () => {
   user._id.toLowerCase().includes(search.toLowerCase())
 );
 
+  //----------Send UserDetails through whatsapp Message Function-------
+
+  const sendWhatsAppMessage = (user) => {
+  const phoneNumber = user.phone || "+94765865283"; // fallback number
+  const message = `Hello, I'm a user of your application. Here are my details:\n\nName: ${user.name}\nEmail: ${user.email}\nAge: ${user.age}\nAddress: ${user.address}\n\nThank you!`;
+
+  const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+  window.open(url, '_blank');  // Open in a new tab
+};
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
@@ -107,7 +116,7 @@ const UserDetails = () => {
       <div className="mb-4 max-w-md mx-auto">
         <input
           type="text"
-          placeholder="Search by Id, name or email"
+          placeholder="Search by name, email or user ID"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -136,7 +145,13 @@ const UserDetails = () => {
                   className="mr-2 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded cursor-pointer">Update</button>
                 <button 
                   onClick={() => handleDelete(user._id)}
-                  className="mr-2 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded cursor-pointer">Delete</button>
+                  className="mr-2 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded cursor-pointer">Delete</button>  
+                <button 
+                  onClick={() => sendWhatsAppMessage(user)}
+                  className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded cursor-pointer"
+                >
+                  Send via WhatsApp
+                </button>
               </div>
             </div>
           ))
