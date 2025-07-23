@@ -6,7 +6,7 @@ dotenv.config();
 import cors from "cors";
 
 const app = express();
-app.use(cors());
+app.use(cors()); //cross origin resource sharing
 
 //Middleware
 app.get('/',(req, res)=> res.send('API is working!'));
