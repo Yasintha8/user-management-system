@@ -60,7 +60,7 @@ const UserDetails = () => {
     ))
   }
 
-  // for download as pdf
+  //----------Function for download User Details as pdf-----------
   const downloadPDF = () => {
   const doc = new jsPDF();
 
@@ -87,35 +87,64 @@ const UserDetails = () => {
   doc.save("user-report.pdf");
 };
 
+  //----------Search User Function-----------
+  const [search, setSearch] = useState('');
+
+  const filteredUsers = Users.filter((user) =>
+  user.name.toLowerCase().includes(search.toLowerCase()) ||
+  user.email.toLowerCase().includes(search.toLowerCase()) ||
+  user._id.toLowerCase().includes(search.toLowerCase())
+);
+
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
       <h1 className="text-3xl font-bold text-center text-blue-700 mb-2">User Details Display</h1>
       <p className="text-center text-gray-600 mb-8">Check the details of users</p>
+      <p className="text-xl font-bold text-center text-blue-700 mb-8">Total Users: {Users.length}</p>
+      
+      {/* Search Box */}
+      <div className="mb-4 max-w-md mx-auto">
+        <input
+          type="text"
+          placeholder="Search by Id, name or email"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+      </div>
 
       <div className="grid gap-6">
-        {Users.map((user) => (
-          <div
-            key={user._id}
-            className="bg-white shadow-md rounded-xl p-6 border border-gray-200 hover:shadow-lg transition duration-300"
-          >
-            <p className="text-lg font-semibold text-gray-800">Name: <span className="font-normal">{user.name}</span></p>
-            <p className="text-gray-600">ID: {user._id}</p>
-            <p className="text-gray-600">Email: {user.email}</p>
-            <p className="text-gray-600">Age: {user.age}</p>
-            <p className="text-gray-600">Address: {user.address}</p>
-            <div className="mt-4">
-              <button 
-                onClick={() => 
-                  window.location.href = `/update-user/${user._id}`
-                }
-                className="mr-2 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded cursor-pointer">Update</button>
-              <button 
-                onClick={() => handleDelete(user._id)}
-                className="mr-2 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded cursor-pointer">Delete</button>
+        {/* Display Users & search user */}
+        {
+          filteredUsers.length > 0 ? (
+          filteredUsers.map((user) => (
+            <div
+              key={user._id}
+              className="bg-white shadow-md rounded-xl p-6 border border-gray-200 hover:shadow-lg transition duration-300"
+            >
+              <p className="text-lg font-semibold text-gray-800">Name: <span className="font-normal">{user.name}</span></p>
+              <p className="text-gray-600">ID: {user._id}</p>
+              <p className="text-gray-600">Email: {user.email}</p>
+              <p className="text-gray-600">Age: {user.age}</p>
+              <p className="text-gray-600">Address: {user.address}</p>
+              <div className="mt-4">
+                <button 
+                  onClick={() => 
+                    window.location.href = `/update-user/${user._id}`
+                  }
+                  className="mr-2 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded cursor-pointer">Update</button>
+                <button 
+                  onClick={() => handleDelete(user._id)}
+                  className="mr-2 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded cursor-pointer">Delete</button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        ):
+        
+          <p className="mt-4 text-center text-gray-600">No user found</p>
+        
+      }
         </div>
         <button
           onClick={downloadPDF}
