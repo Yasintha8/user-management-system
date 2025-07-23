@@ -21,6 +21,10 @@ export const getAllUsers = async (req, res, next) => {
 export const createUsers = async (req, res, next) => {
     const { name, email, age, address } = req.body; //Insert data
 
+    if (!name || !email || !age || !address) {
+      return res.status(400).json({ error: "All fields are required." });
+    }
+    
     try {
         const users = new User({ name, email, age, address });
         await users.save();
