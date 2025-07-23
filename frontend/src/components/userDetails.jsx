@@ -26,7 +26,8 @@ const UserDetails = () => {
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
-      <h1 className="text-3xl font-bold text-center text-blue-700 mb-8">User Details Display</h1>
+      <h1 className="text-3xl font-bold text-center text-blue-700 mb-2">User Details Display</h1>
+      <p className="text-center text-gray-600 mb-8">Check the details of users</p>
 
       <div className="grid gap-6">
         {Users.map((user) => (
