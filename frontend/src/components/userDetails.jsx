@@ -41,7 +41,11 @@ const UserDetails = () => {
             <p className="text-gray-600">Age: {user.age}</p>
             <p className="text-gray-600">Address: {user.address}</p>
             <div className="mt-4">
-              <button className="mr-2 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded cursor-pointer">Update</button>
+              <button 
+                onClick={() => 
+                  window.location.href = `/update-user/${user._id}`
+                }
+                className="mr-2 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded cursor-pointer">Update</button>
               <button className="mr-2 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded cursor-pointer">Delete</button>
             </div>
           </div>

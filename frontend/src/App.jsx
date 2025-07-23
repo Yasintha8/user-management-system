@@ -4,6 +4,7 @@ import Adduser from './components/adduser'
 import UserDetails  from './components/userDetails'
 import Navbar from './components/navbar'
 import { Toaster } from 'react-hot-toast';
+import UpdateUser from './components/updateUser'
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <Route path="/mainhome" element={<Home />} />
         <Route path="/add-user" element={<Adduser />} />
         <Route path="/user-details" element={<UserDetails />} />
+        <Route path="/update-user/:id" element={<UpdateUser />} />
       </Routes>
     </div>
   )
