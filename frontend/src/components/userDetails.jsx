@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 const UserDetails = () => {
 
   const [Users, setUsers] = useState([]);
@@ -57,8 +58,36 @@ const UserDetails = () => {
         </div>
       </span>
     ))
-
   }
+
+  // for download as pdf
+  const downloadPDF = () => {
+  const doc = new jsPDF();
+
+  // Title
+  doc.text("User Details Report", 14, 15);
+
+  // Prepare data
+  const tableColumn = ["Name", "Email", "Age", "Address"];
+  const tableRows = Users.map(user => [
+    user.name,
+    user.email,
+    user.age,
+    user.address
+  ]);
+
+  // Draw table
+  autoTable(doc, {
+    startY: 20,
+    head: [tableColumn],
+    body: tableRows,
+  });
+
+  // Save PDF
+  doc.save("user-report.pdf");
+};
+
+
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
       <h1 className="text-3xl font-bold text-center text-blue-700 mb-2">User Details Display</h1>
@@ -67,7 +96,7 @@ const UserDetails = () => {
       <div className="grid gap-6">
         {Users.map((user) => (
           <div
-            key={user.id}
+            key={user._id}
             className="bg-white shadow-md rounded-xl p-6 border border-gray-200 hover:shadow-lg transition duration-300"
           >
             <p className="text-lg font-semibold text-gray-800">Name: <span className="font-normal">{user.name}</span></p>
@@ -87,7 +116,13 @@ const UserDetails = () => {
             </div>
           </div>
         ))}
-      </div>
+        </div>
+        <button
+          onClick={downloadPDF}
+          className="mb-6 mt-4 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded cursor-pointer"
+        >
+          Download PDF Report
+        </button>
     </div>
 
   )
