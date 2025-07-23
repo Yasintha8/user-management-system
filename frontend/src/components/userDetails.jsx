@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const UserDetails = () => {
 
@@ -24,6 +25,40 @@ const UserDetails = () => {
     fetchUsers();
   }, []);
 
+
+  const handleDelete = async (id) => {
+    toast((t) => (
+      <span>
+        Are you sure, you want to delete this user?
+        <div className="flex gap-2 mt-2">
+        <button 
+          className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 cursor-pointer"
+          onClick={async ()=>{
+            toast.dismiss(t.id);
+            try {
+              const response = await axios.delete(import.meta.env.VITE_BACKEND_URL + `/api/users/${id}`);
+              console.log(response.data);
+              toast.success("User deleted successfully");
+              fetchUsers();
+            } catch (error) {
+              console.error(error);
+              toast.error("Unable to delete user");
+            }
+          }}
+          >
+          Yes
+        </button>
+        <button 
+          className="bg-gray-600 text-white px-3 py-1 rounded hover:bg-gray-700 cursor-pointer"
+          onClick={() => toast.dismiss(t.id)}
+          >
+          No
+        </button>
+        </div>
+      </span>
+    ))
+
+  }
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
       <h1 className="text-3xl font-bold text-center text-blue-700 mb-2">User Details Display</h1>
@@ -46,7 +81,9 @@ const UserDetails = () => {
                   window.location.href = `/update-user/${user._id}`
                 }
                 className="mr-2 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded cursor-pointer">Update</button>
-              <button className="mr-2 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded cursor-pointer">Delete</button>
+              <button 
+                onClick={() => handleDelete(user._id)}
+                className="mr-2 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded cursor-pointer">Delete</button>
             </div>
           </div>
         ))}
