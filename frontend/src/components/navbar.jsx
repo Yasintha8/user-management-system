@@ -30,6 +30,9 @@ const Navbar = () => {
             <Link to="/user-details" className="hover:text-yellow-300 transition duration-300">User Details</Link>
           </li>
           <li>
+            <Link to="/contact" className="hover:text-yellow-300 transition duration-300">Contact Us</Link>
+          </li>
+          <li>
             <Link to="/register" className="text-gray-600 font-semibold bg-yellow-400 px-4 py-2 rounded hover:text-yellow-600 hover:bg-white transition duration-300">Register</Link>
           </li>
           <li>
@@ -49,6 +52,9 @@ const Navbar = () => {
           </li>
           <li>
             <Link to="/user-details" className="block hover:text-yellow-300" onClick={toggleMenu}>User Details</Link>
+          </li>
+          <li>
+            <Link to="/contact" className="hover:text-yellow-300 transition duration-300">Contact Us</Link>
           </li>
           <li>
             <Link to="/register" className="block bg-yellow-400 px-4 py-2 rounded hover:text-yellow-600 hover:bg-white transition duration-300" onClick={toggleMenu}>Register</Link>

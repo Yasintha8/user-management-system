@@ -7,6 +7,7 @@ import { Toaster } from 'react-hot-toast';
 import UpdateUser from './components/updateUser'
 import Register from './components/register'
 import Login from './components/login'
+import Contact from './components/contact'
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/update-user/:id" element={<UpdateUser />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path='/contact' element={<Contact />} />
       </Routes>
     </div>
   )

@@ -31,31 +31,35 @@ const Login = () => {
 }
 
   return (
-    <div className="w-full h-screen flex justify-center items-center">
-      <div className="bg-white p-8 rounded-lg shadow-md w-96">
-        <h2 className="text-2xl font-semibold mb-4">Login</h2>
-        <input
-          type="email"
-          placeholder="Email"
-          className="border border-gray-300 rounded-md px-4 py-2 mb-4 w-full"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          className="border border-gray-300 rounded-md px-4 py-2 mb-4 w-full"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button
-          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 w-full cursor-pointer"
-          onClick={handleLogin}
-        >
-          Login
-        </button>
-      </div>
-    </div>
+    <div className="flex items-center justify-center h-screen bg-gray-100 ">
+  <div className="w-full max-w-md bg-white p-6 rounded shadow mx-4 ">
+    <h2 className="text-2xl font-semibold mb-6 text-center text-blue-600">Login</h2>
+    
+    <input
+      type="email"
+      placeholder="Email"
+      className="w-full border border-gray-300 rounded px-4 py-2 focus:ring-2 focus:ring-blue-400 outline-none mb-4"
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+    />
+
+    <input
+      type="password"
+      placeholder="Password"
+      className="w-full border border-gray-300 rounded px-4 py-2 focus:ring-2 focus:ring-blue-400 outline-none mb-6"
+      value={password}
+      onChange={(e) => setPassword(e.target.value)}
+    />
+
+    <button
+      className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 w-full transition"
+      onClick={handleLogin}
+    >
+      Login
+    </button>
+  </div>
+</div>
+
   )
 }
 
