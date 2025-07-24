@@ -6,6 +6,9 @@ dotenv.config();
 import cors from "cors";
 import RegisterUserRouter from "./Routes/RegisterUserRoutes.js";
 import LoginUserRouter from "./Routes/LoginUserRoutes.js";
+import pdfRouter from "./Routes/pdfRoutes.js";
+import path from "path";
+import { fileURLToPath } from 'url';
 
 const app = express();
 app.use(cors()); //cross origin resource sharing
@@ -17,6 +20,12 @@ app.use(express.json());
 app.use('/api/users',UserRouter)
 app.use('/api/register',RegisterUserRouter)
 app.use('/api/login',LoginUserRouter)
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use('/api/pdf', pdfRouter);
 
 mongoose.connect(process.env.MONGO_URl)
 .then(()=>
