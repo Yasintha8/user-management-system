@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const Home = () => {
-  const [recentUsers, setRecentUsers] = useState([]);
+   const [recentUsers, setRecentUsers] = useState([]);
 
   // Fetch some recent users to show as preview
   useEffect(() => {
@@ -18,72 +18,73 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="max-w-4xl mx-auto p-6 text-center">
-      <h1 className="text-4xl font-bold text-blue-700 mb-4">
+    <div className="max-w-4xl mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-2 text-center">
         Welcome to User Management System
       </h1>
-      <p className="text-lg text-gray-700 mb-8">
+      <p className="mb-6 text-center text-gray-600">
         Easily manage your users, add new profiles, update details, and
         keep everything organized in one place.
       </p>
-      <div className="space-x-4 mb-10">
+      
+      <div className="flex gap-3 justify-center mb-8">
         <a
           href="/add-user"
-          className="inline-block bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition"
+          className="bg-blue-500 text-white px-4 py-2 rounded text-sm hover:bg-blue-600"
         >
           Add New User
         </a>
         <a
           href="/user-details"
-          className="inline-block bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700 transition"
+          className="bg-green-500 text-white px-4 py-2 rounded text-sm hover:bg-green-600"
         >
           View Users
         </a>
       </div>
 
       {/* Features Section */}
-      <section className="mb-12 text-left">
-        <h2 className="text-2xl font-semibold mb-4 text-blue-600">Features</h2>
-        <ul className="list-disc list-inside space-y-2 text-gray-700 max-w-xl mx-auto">
-          <li>Secure user registration with encrypted passwords</li>
-          <li>Login authentication and user session management</li>
-          <li>View, update, and delete user profiles with ease</li>
-          <li>Search users by name, email, or ID</li>
-          <li>Download user data reports as PDF</li>
+      <div className="mb-8">
+        <h2 className="text-lg font-medium mb-3">Features</h2>
+        <ul className="text-sm text-gray-700 space-y-1">
+          <li>• Secure user registration with encrypted passwords</li>
+          <li>• Login authentication and user session management</li>
+          <li>• View, update, and delete user profiles with ease</li>
+          <li>• Search users by name, email, or ID</li>
+          <li>• Download user data reports as PDF</li>
         </ul>
-      </section>
+      </div>
 
       {/* Recent Users Preview */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-semibold mb-4 text-blue-600">Recent Users</h2>
+      <div className="mb-8">
+        <h2 className="text-lg font-medium mb-3">Recent Users</h2>
         {recentUsers.length === 0 ? (
-          <p className="text-gray-500">No users to display.</p>
+          <p className="text-gray-500 text-sm">No users to display.</p>
         ) : (
-          <div className="max-w-xl mx-auto bg-white rounded shadow p-4 text-left">
-            <table className="w-full text-left border-collapse">
+          <div className="border rounded p-3">
+            <table className="w-full text-sm">
               <thead>
-                <tr>
-                  <th className="border-b py-2">Name</th>
-                  <th className="border-b py-2">Email</th>
-                  <th className="border-b py-2">Age</th>
+                <tr className="border-b">
+                  <th className="text-left py-1">Name</th>
+                  <th className="text-left py-1">Email</th>
+                  <th className="text-left py-1">Age</th>
                 </tr>
               </thead>
               <tbody>
                 {recentUsers.map((user) => (
-                  <tr key={user._id} className="hover:bg-gray-100">
-                    <td className="py-2">{user.name}</td>
-                    <td className="py-2">{user.email}</td>
-                    <td className="py-2">{user.age}</td>
+                  <tr key={user._id}>
+                    <td className="py-1">{user.name}</td>
+                    <td className="py-1">{user.email}</td>
+                    <td className="py-1">{user.age}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
         )}
-      </section>
+      </div>
 
       {/* Footer */}
-      <footer className="text-sm text-gray-500 mt-20">
+      <footer className="text-xs text-gray-400 text-center">
         &copy; {new Date().getFullYear()} User Management System. All rights reserved.
       </footer>
     </div>
