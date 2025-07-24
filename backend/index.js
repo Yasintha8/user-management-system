@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import UserRouter from "./Routes/UserRoutes.js";
 dotenv.config();
 import cors from "cors";
+import RegisterUserRouter from "./Routes/RegisterUserRoutes.js";
 
 const app = express();
 app.use(cors()); //cross origin resource sharing
@@ -13,6 +14,7 @@ app.get('/',(req, res)=> res.send('API is working!'));
 
 app.use(express.json());
 app.use('/api/users',UserRouter)
+app.use('/api/register',RegisterUserRouter)
 
 mongoose.connect(process.env.MONGO_URl)
 .then(()=>
