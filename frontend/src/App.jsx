@@ -5,6 +5,8 @@ import UserDetails  from './components/userDetails'
 import Navbar from './components/navbar'
 import { Toaster } from 'react-hot-toast';
 import UpdateUser from './components/updateUser'
+import Register from './components/register'
+import Login from './components/login'
 
 function App() {
 
@@ -18,6 +20,8 @@ function App() {
         <Route path="/add-user" element={<Adduser />} />
         <Route path="/user-details" element={<UserDetails />} />
         <Route path="/update-user/:id" element={<UpdateUser />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </div>
   )
