@@ -21,7 +21,7 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-6">
           <li>
-            <Link to="/mainhome" className="hover:text-yellow-300 transition duration-300">Home</Link>
+            <Link to="/" className="hover:text-yellow-300 transition duration-300">Home</Link>
           </li>
           <li>
             <Link to="/add-user" className="hover:text-yellow-300 transition duration-300">Add User</Link>
@@ -45,7 +45,7 @@ const Navbar = () => {
       {isOpen && (
         <ul className="md:hidden mt-4 space-y-3 px-4">
           <li>
-            <Link to="/mainhome" className="block hover:text-yellow-300" onClick={toggleMenu}>Home</Link>
+            <Link to="/" className="block hover:text-yellow-300" onClick={toggleMenu}>Home</Link>
           </li>
           <li>
             <Link to="/add-user" className="block hover:text-yellow-300" onClick={toggleMenu}>Add User</Link>

@@ -17,7 +17,6 @@ function App() {
       <Toaster position="top-center" />
       <Routes>
         <Route path="/" element={<Home />} /> //default when page load
-        <Route path="/mainhome" element={<Home />} />
         <Route path="/add-user" element={<Adduser />} />
         <Route path="/user-details" element={<UserDetails />} />
         <Route path="/update-user/:id" element={<UpdateUser />} />

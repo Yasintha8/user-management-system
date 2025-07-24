@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
-const UserDetails = () => {
 
+const UserDetails = () => {
   const [Users, setUsers] = useState([]);
 
   const fetchUsers = async () => {
@@ -25,7 +25,6 @@ const UserDetails = () => {
   useEffect(() => {
     fetchUsers();
   }, []);
-
 
   const handleDelete = async (id) => {
     toast((t) => (
@@ -107,68 +106,104 @@ const UserDetails = () => {
 };
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
-      <h1 className="text-3xl font-bold text-center text-blue-700 mb-2">User Details Display</h1>
-      <p className="text-center text-gray-600 mb-8">Check the details of users</p>
-      <p className="text-xl font-bold text-center text-blue-700 mb-8">Total Users: {Users.length}</p>
-      
-      {/* Search Box */}
-      <div className="mb-4 max-w-md mx-auto">
-        <input
-          type="text"
-          placeholder="Search by name, email or user ID"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-        />
+    <div className="min-h-screen bg-white">
+      {/* Header Section */}
+      <div className="bg-white border-b border-gray-200 px-6 py-8">
+        <div className="max-w-6xl mx-auto">
+          <h1 className="text-2xl font-semibold text-gray-900 mb-2">User Management</h1>
+          <p className="text-gray-600 mb-4">Manage and view user details</p>
+          <div className="flex items-center justify-between">
+            <div className="text-sm text-gray-500">
+              Total Users: <span className="font-medium text-gray-900">{Users.length}</span>
+            </div>
+            <button
+              onClick={downloadPDF}
+              className="bg-gray-900 hover:bg-gray-800 text-white px-4 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer"
+            >
+              Download Report
+            </button>
+          </div>
+        </div>
       </div>
 
-      <div className="grid gap-6">
-        {/* Display Users & search user */}
-        {
-          filteredUsers.length > 0 ? (
-          filteredUsers.map((user) => (
-            <div
-              key={user._id}
-              className="bg-white shadow-md rounded-xl p-6 border border-gray-200 hover:shadow-lg transition duration-300"
-            >
-              <p className="text-lg font-semibold text-gray-800">Name: <span className="font-normal">{user.name}</span></p>
-              <p className="text-gray-600">ID: {user._id}</p>
-              <p className="text-gray-600">Email: {user.email}</p>
-              <p className="text-gray-600">Age: {user.age}</p>
-              <p className="text-gray-600">Address: {user.address}</p>
-              <div className="mt-4">
-                <button 
-                  onClick={() => 
-                    window.location.href = `/update-user/${user._id}`
-                  }
-                  className="mr-2 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded cursor-pointer">Update</button>
-                <button 
-                  onClick={() => handleDelete(user._id)}
-                  className="mr-2 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded cursor-pointer">Delete</button>  
-                <button 
-                  onClick={() => sendWhatsAppMessage(user)}
-                  className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded cursor-pointer"
-                >
-                  Send via WhatsApp
-                </button>
-              </div>
-            </div>
-          ))
-        ):
-        
-          <p className="mt-4 text-center text-gray-600">No user found</p>
-        
-      }
+      {/* Content Section */}
+      <div className="max-w-6xl mx-auto px-6 py-8">
+        {/* Search Box */}
+        <div className="mb-8">
+          <input
+            type="text"
+            placeholder="Search by name, email or user ID..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full max-w-md px-4 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+          />
         </div>
-        <button
-          onClick={downloadPDF}
-          className="mb-6 mt-4 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded cursor-pointer"
-        >
-          Download PDF Report
-        </button>
-    </div>
 
+        {/* Users List */}
+        <div className="space-y-4">
+          {filteredUsers.length > 0 ? (
+            filteredUsers.map((user) => (
+              <div
+                key={user._id}
+                className="bg-white border border-gray-200 rounded-lg p-6 hover:border-gray-300 transition-colors"
+              >
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+                  <div>
+                    <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Name</label>
+                    <p className="text-sm text-gray-900 mt-1 font-semibold">{user.name}</p>
+                  </div>
+                  <div>
+                    <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Email</label>
+                    <p className="text-sm text-gray-900 mt-1">{user.email}</p>
+                  </div>
+                  <div>
+                    <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Age</label>
+                    <p className="text-sm text-gray-900 mt-1">{user.age}</p>
+                  </div>
+                  <div>
+                    <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">ID</label>
+                    <p className="text-xs text-gray-500 mt-1 font-mono">{user._id}</p>
+                  </div>
+                </div>
+                
+                <div className="mb-4">
+                  <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Address</label>
+                  <p className="text-sm text-gray-900 mt-1">{user.address}</p>
+                </div>
+
+                <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-100">
+                  <button 
+                    onClick={() => window.location.href = `/update-user/${user._id}`}
+                    className="bg-white hover:bg-gray-50 text-gray-700 border border-gray-300 px-3 py-1.5 text-sm font-medium rounded-md transition-colors cursor-pointer"
+                  >
+                    Update
+                  </button>
+                  <button 
+                    onClick={() => handleDelete(user._id)}
+                    className="bg-white hover:bg-red-50 text-red-600 border border-red-300 px-3 py-1.5 text-sm font-medium rounded-md transition-colors cursor-pointer"
+                  >
+                    Delete
+                  </button>  
+                  <button 
+                    onClick={() => sendWhatsAppMessage(user)}
+                    className="bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 text-sm font-medium rounded-md transition-colors cursor-pointer"
+                  >
+                    Send via WhatsApp
+                  </button>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-gray-500">No users found</p>
+              {search && (
+                <p className="text-sm text-gray-400 mt-1">Try adjusting your search terms</p>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
   )
 }
 

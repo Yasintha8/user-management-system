@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Typewriter } from "react-simple-typewriter";
 
 const Home = () => {
    const [recentUsers, setRecentUsers] = useState([]);
@@ -19,9 +20,17 @@ const Home = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-2 text-center">
-        Welcome to User Management System
-      </h1>
+      <h1 className="text-4xl font-bold mb-4 text-center text-blue-700 font-">
+          <Typewriter
+            words={['Welcome to User Management System👋']}
+            loop={Infinity}
+            cursor
+            cursorStyle="|"
+            typeSpeed={70}
+            deleteSpeed={50}
+            delaySpeed={1500}
+          />
+        </h1>
       <p className="mb-6 text-center text-gray-600">
         Easily manage your users, add new profiles, update details, and
         keep everything organized in one place.
