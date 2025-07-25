@@ -9,6 +9,7 @@ import Register from './components/register'
 import Login from './components/login'
 import Contact from './components/contact'
 import SendPDF from './components/sendPDF'
+import Gallery from './components/gallery'
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/send-pdf' element={<SendPDF />} />
+        <Route path='/gallery' element={<Gallery />} />
       </Routes>
     </div>
   )
