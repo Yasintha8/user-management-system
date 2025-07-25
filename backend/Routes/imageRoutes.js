@@ -1,7 +1,7 @@
 import express from "express";
 import multer from "multer";
 import path from "path";
-import { getImages, uploadImage } from "../Controllers/imageController.js";
+import { deleteImage, getImages, uploadImage } from "../Controllers/imageController.js";
 
 const imageRouter = express.Router();
 
@@ -21,5 +21,6 @@ const upload = multer({ storage });
 // Routes
 imageRouter.post("/upload", upload.single("image"), uploadImage);
 imageRouter.get("/getImages", getImages);
+imageRouter.delete("/:id", deleteImage);
 
 export default imageRouter;

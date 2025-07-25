@@ -1,5 +1,7 @@
 import Image from "../Models/ImageModel.js";
-
+import path from "path";
+import { fileURLToPath } from "url";
+import fs from "fs";
 
 // Upload image and save URL to DB
 export const uploadImage = async (req, res) => {
@@ -48,3 +50,27 @@ export const getImages = async (req, res) => {
     res.status(500).json({ message: "Server error while fetching images" });
   }
 };
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+// Delete Image
+export const deleteImage = async (req, res) => {
+  try {
+    const image = await Image.findById(req.params.id);
+    if (!image) return res.status(404).json({ message: "Image not found" });
+
+    // Delete the image file from the server
+    const filename = image.url.split("/uploads/")[1];
+    const filePath = path.join(__dirname, "../uploads", filename);
+    fs.unlink(filePath, (err) => {
+      if (err) console.error("File deletion error:", err);
+    });
+
+    await Image.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: "Image deleted successfully" });
+  } catch (error) {
+    console.error("Delete error:", error);
+    res.status(500).json({ message: "Server error while deleting image" });
+  }
+};
+
