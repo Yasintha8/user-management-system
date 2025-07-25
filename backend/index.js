@@ -9,6 +9,7 @@ import LoginUserRouter from "./Routes/LoginUserRoutes.js";
 import pdfRouter from "./Routes/pdfRoutes.js";
 import path from "path";
 import { fileURLToPath } from 'url';
+import imageRouter from "./Routes/imageRoutes.js";
 
 const app = express();
 app.use(cors()); //cross origin resource sharing
@@ -26,6 +27,8 @@ const __dirname = path.dirname(__filename);
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use('/api/pdf', pdfRouter);
+
+app.use('/api/gallery', imageRouter)
 
 mongoose.connect(process.env.MONGO_URl)
 .then(()=>
