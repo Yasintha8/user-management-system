@@ -14,7 +14,7 @@ export const sendPdf = async (req, res) => {
     console.log("PDF Title:", title);
     console.log("Uploaded File Path:", file.path);
 
-    // After successful upload
+        // After successful upload
         const fileUrl = `/uploads/${req.file.filename}`;
 
         const newPdf = new Pdf({

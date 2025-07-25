@@ -22,10 +22,10 @@ export const uploadImage = async (req, res) => {
 
     console.log("File uploaded successfully:", req.file.filename);
 
-    // After successful upload 
+    const imageUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
 
     const newImage = new Image({
-      url: `/uploads/${req.file.filename}`,
+      url: imageUrl,
     });
 
     await newImage.save();
@@ -36,6 +36,7 @@ export const uploadImage = async (req, res) => {
     res.status(500).json({ message: "Server error while uploading image" });
   }
 };
+
 
 // Get all uploaded images
 export const getImages = async (req, res) => {
