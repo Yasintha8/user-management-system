@@ -46,6 +46,7 @@ const Adduser = () => {
           type="text"
           id="name"
           required
+          placeholder="Enter name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -61,6 +62,7 @@ const Adduser = () => {
           type="email"
           id="email"
           required
+          placeholder="Enter email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -76,6 +78,7 @@ const Adduser = () => {
           type="number"
           id="age"
           required
+          placeholder="Enter age"
           value={age}
           onChange={(e) => setAge(e.target.value)}
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -91,6 +94,7 @@ const Adduser = () => {
           type="text"
           id="address"
           required
+          placeholder="Enter address"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"

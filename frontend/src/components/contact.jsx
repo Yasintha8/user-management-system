@@ -42,6 +42,7 @@ const Contact = () => {
           <input
             type="text"
             name="name"
+            placeholder="Enter name"
             required
             className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
@@ -54,6 +55,7 @@ const Contact = () => {
             type="email"
             name="email"
             required
+            placeholder="Enter email"
             className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
@@ -65,6 +67,7 @@ const Contact = () => {
             name="message"
             rows="4"
             required
+            placeholder="Enter message"
             className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           ></textarea>
         </div>
