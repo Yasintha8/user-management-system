@@ -8,6 +8,22 @@ export const uploadImage = async (req, res) => {
       return res.status(400).json({ message: "No file uploaded" });
     }
 
+    if (!req.file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
+      return res.status(400).json({ message: "Invalid file format" });
+    }
+
+    if (req.file.size > 5 * 1024 * 1024) {
+      return res.status(400).json({ message: "File size limit exceeded" });
+    }
+
+    if (req.file.mimetype !== "image/jpeg" && req.file.mimetype !== "image/png") {
+      return res.status(400).json({ message: "Invalid file type" });
+    }
+
+    console.log("File uploaded successfully:", req.file.filename);
+
+    // After successful upload 
+
     const newImage = new Image({
       url: `/uploads/${req.file.filename}`,
     });
