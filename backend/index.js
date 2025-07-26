@@ -6,6 +6,9 @@ import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
 
+const app = express();
+
+app.use(cors());
 // Fix for ES Modules (__dirname and __filename)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -23,11 +26,9 @@ import imageRouter from "./Routes/imageRoutes.js";
 
 dotenv.config();
 
-const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(cors());
 app.use(express.json());
 
 // Static folder for uploaded images 
