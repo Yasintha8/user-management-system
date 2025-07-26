@@ -25,7 +25,7 @@ const __dirname = path.dirname(__filename);
 app.use(cors());
 app.use(express.json());
 
-// Static folder for uploaded images ✅
+// Static folder for uploaded images 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Routes
