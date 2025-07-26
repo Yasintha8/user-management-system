@@ -42,7 +42,7 @@ const Register = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center min-h-[280px]">
+    <div className="flex flex-col justify-center px-4">
       <h2 className="text-3xl font-semibold mb-2 text-center text-blue-600">Register</h2>
       <p className="text-center text-gray-600 mb-8">Please fill in the form below to create an account.</p>
 
@@ -54,6 +54,7 @@ const Register = () => {
           value={formData.name}
           onChange={handleChange}
           required
+          placeholder="Enter your name"
           className="w-full border border-gray-300 rounded-lg px-5 py-3 focus:ring-2 focus:ring-blue-400 outline-none mb-6 transition"
         />
 
@@ -64,6 +65,7 @@ const Register = () => {
           value={formData.email}
           onChange={handleChange}
           required
+          placeholder="Enter your email"
           className="w-full border border-gray-300 rounded-lg px-5 py-3 focus:ring-2 focus:ring-blue-400 outline-none mb-6 transition"
         />
 
@@ -74,6 +76,7 @@ const Register = () => {
           value={formData.password}
           onChange={handleChange}
           required
+          placeholder="Enter your password"
           className="w-full border border-gray-300 rounded-lg px-5 py-3 focus:ring-2 focus:ring-blue-400 outline-none mb-6 transition"
         />
 
@@ -84,6 +87,7 @@ const Register = () => {
           value={formData.confirmPassword}
           onChange={handleChange}
           required
+          placeholder="Confirm your password"
           className="w-full border border-gray-300 rounded-lg px-5 py-3 focus:ring-2 focus:ring-blue-400 outline-none mb-8 transition"
         />
 
