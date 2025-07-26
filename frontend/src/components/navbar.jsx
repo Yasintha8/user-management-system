@@ -47,7 +47,7 @@ const Navbar = () => {
             <Link to="/gallery" className="hover:text-yellow-300 transition duration-300">Gallery</Link>
           </li>
           <li>
-            <Link to="/" className="bg-red-500 px-4 py-2 rounded" onClick={handleLogout}>Logout</Link>
+            <Link to="/" className="bg-red-500 hover:bg-red-600 transition duration-300 px-4 py-2 rounded" onClick={handleLogout}>Logout</Link>
           </li>
         </ul>
       </div>
@@ -74,7 +74,7 @@ const Navbar = () => {
             <Link to="/gallery" className="hover:text-yellow-300 transition duration-300">Gallery</Link>
           </li>
           <li>
-            <Link to="/" className="bg-red-500 px-4 py-2 rounded" onClick={handleLogout}>Logout</Link>
+            <Link to="/" className="bg-red-500 hover:bg-red-600 transition duration-300 px-4 py-2 rounded" onClick={handleLogout}>Logout</Link>
           </li>
         </ul>
       )}
