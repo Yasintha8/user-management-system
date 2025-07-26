@@ -34,7 +34,7 @@ const Register = () => {
       console.log(response.data);
       toast.success(response.data.message || "User registered successfully");
       localStorage.setItem("token", response.data.token);
-      navigate("/login");
+      navigate("/login", { state: { defaultTab: "login" } });
     } catch (error) {
       console.error(error);
       toast.error(error.response?.data?.message || "Unable to register user");

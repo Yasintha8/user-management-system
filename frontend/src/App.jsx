@@ -14,7 +14,7 @@ import ProtectedRoute from './components/protectedRoute';
 function App() {
 
   const location = useLocation();
-  const showNavbar = location.pathname !== "/";
+  const showNavbar = location.pathname !== "/" && location.pathname !== "/login";
   
   return (
     <div>
@@ -23,6 +23,7 @@ function App() {
       <Routes>
         {/* Public Route */}
         <Route path="/" element={<AuthPage />} />
+        <Route path="/login" element={<AuthPage />} />
 
         {/* Protected Routes */}
         <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
