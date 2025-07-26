@@ -1,15 +1,23 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react"; 
+import toast from "react-hot-toast";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => setIsOpen(!isOpen);
+  const navigate = useNavigate();
+
+      const handleLogout = () => {
+      localStorage.removeItem('token'); // Clear the stored token
+      toast.success('Logout successful');
+      navigate('/'); // Redirect to AuthPage
+  };
 
   return (
     <nav className="bg-blue-600 text-white px-6 py-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
-        <Link to="/" className="text-xl font-semibold">
+        <Link to="/home" className="text-xl font-semibold">
           User Management
         </Link>
 
@@ -21,7 +29,7 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-6">
           <li>
-            <Link to="/" className="hover:text-yellow-300 transition duration-300">Home</Link>
+            <Link to="/home" className="hover:text-yellow-300 transition duration-300">Home</Link>
           </li>
           <li>
             <Link to="/add-user" className="hover:text-yellow-300 transition duration-300">Add User</Link>
@@ -39,10 +47,7 @@ const Navbar = () => {
             <Link to="/gallery" className="hover:text-yellow-300 transition duration-300">Gallery</Link>
           </li>
           <li>
-            <Link to="/register" className="text-gray-600 font-semibold bg-yellow-400 px-4 py-2 rounded hover:text-yellow-600 hover:bg-white transition duration-300">Register</Link>
-          </li>
-          <li>
-            <Link to="/login" className="text-gray-600 font-semibold bg-yellow-400 px-4 py-2 rounded hover:text-yellow-600 hover:bg-white transition duration-300">Login</Link>
+            <Link to="/" className="bg-red-500 px-4 py-2 rounded" onClick={handleLogout}>Logout</Link>
           </li>
         </ul>
       </div>
@@ -51,7 +56,7 @@ const Navbar = () => {
       {isOpen && (
         <ul className="md:hidden mt-4 space-y-3 px-4">
           <li>
-            <Link to="/" className="block hover:text-yellow-300" onClick={toggleMenu}>Home</Link>
+            <Link to="/home" className="block hover:text-yellow-300" onClick={toggleMenu}>Home</Link>
           </li>
           <li>
             <Link to="/add-user" className="block hover:text-yellow-300" onClick={toggleMenu}>Add User</Link>
@@ -69,10 +74,7 @@ const Navbar = () => {
             <Link to="/gallery" className="hover:text-yellow-300 transition duration-300">Gallery</Link>
           </li>
           <li>
-            <Link to="/register" className="block bg-yellow-400 px-4 py-2 rounded hover:text-yellow-600 hover:bg-white transition duration-300" onClick={toggleMenu}>Register</Link>
-          </li>
-          <li>
-            <Link to="/login" className="block bg-yellow-400 px-4 py-2 rounded hover:text-yellow-600 hover:bg-white transition duration-300" onClick={toggleMenu}>Login</Link>
+            <Link to="/" className="bg-red-500 px-4 py-2 rounded" onClick={handleLogout}>Logout</Link>
           </li>
         </ul>
       )}
