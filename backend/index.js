@@ -23,7 +23,6 @@ import RegisterUserRouter from "./Routes/RegisterUserRoutes.js";
 import LoginUserRouter from "./Routes/LoginUserRoutes.js";
 import pdfRouter from "./Routes/pdfRoutes.js";
 import imageRouter from "./Routes/imageRoutes.js";
-import { verifyToken } from "./middleware/authMiddleware.js";
 
 dotenv.config();
 
@@ -31,7 +30,6 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
-app.use(verifyToken);
 // Static folder for uploaded images 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
