@@ -6,10 +6,16 @@ import { HiCheckCircle } from "react-icons/hi";
 const Home = () => {
   const [recentUsers, setRecentUsers] = useState([]);
 
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
     async function fetchUsers() {
       try {
-        const res = await axios.get(import.meta.env.VITE_BACKEND_URL + "/api/users");
+        const res = await axios.get(import.meta.env.VITE_BACKEND_URL + "/api/users",{
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
         setRecentUsers(res.data.slice(0, 5));
       } catch (error) {
         console.error("Failed to fetch users:", error);
