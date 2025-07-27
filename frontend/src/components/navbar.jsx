@@ -65,13 +65,13 @@ const Navbar = () => {
             <Link to="/user-details" className="block hover:text-yellow-300" onClick={toggleMenu}>User Details</Link>
           </li>
           <li>
-            <Link to="/contact" className="hover:text-yellow-300 transition duration-300">Contact Us</Link>
+            <Link to="/contact" className="hover:text-yellow-300 transition duration-300" onClick={toggleMenu}>Contact Us</Link>
           </li>
           <li>
-            <Link to="/send-pdf" className="hover:text-yellow-300 transition duration-300">Send PDF</Link>
+            <Link to="/send-pdf" className="hover:text-yellow-300 transition duration-300" onClick={toggleMenu}>Send PDF</Link>
           </li>
           <li>
-            <Link to="/gallery" className="hover:text-yellow-300 transition duration-300">Gallery</Link>
+            <Link to="/gallery" className="hover:text-yellow-300 transition duration-300" onClick={toggleMenu}>Gallery</Link>
           </li>
           <li>
             <Link to="/" className="bg-red-500 hover:bg-red-600 transition duration-300 px-4 py-2 rounded" onClick={handleLogout}>Logout</Link>
