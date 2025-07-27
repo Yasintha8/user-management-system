@@ -5,6 +5,8 @@ import { toast } from "react-hot-toast";
 
 const UpdateUser = () => {
 
+    const token = localStorage.getItem("token");
+
     const { id } = useParams();
 
     const navigate = useNavigate();
@@ -20,7 +22,11 @@ const UpdateUser = () => {
         
         try {
             const response = await axios.put(import.meta.env.VITE_BACKEND_URL + `/api/users/${id}`, 
-              data
+              data,{
+                headers: {
+                  Authorization: `Bearer ${token}`
+                }
+              }
             );
             console.log("User updated successfully :", response.data);
             toast.success("User updated successfully");
@@ -34,7 +40,11 @@ const UpdateUser = () => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await axios.get(import.meta.env.VITE_BACKEND_URL + `/api/users/${id}`);
+                const response = await axios.get(import.meta.env.VITE_BACKEND_URL + `/api/users/${id}`,{
+                    headers: {
+                      Authorization: `Bearer ${token}`
+                    }
+                });
                 console.log(response.data);
                 setName(response.data.name);
                 setEmail(response.data.email);
@@ -43,6 +53,11 @@ const UpdateUser = () => {
             } catch (error) {
                 console.error(error);
             }
+        }
+        if (!token) {
+        toast.error("No token found. Please log in again.");
+        navigate("/login");
+        return;
         }
         fetchUser();
     }, [id]);

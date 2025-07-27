@@ -7,24 +7,31 @@ import autoTable from "jspdf-autotable";
 const UserDetails = () => {
   const [Users, setUsers] = useState([]);
 
+  const token = localStorage.getItem("token");
+
   const fetchUsers = async () => {
     try {
-      axios.get(import.meta.env.VITE_BACKEND_URL + '/api/users')
-        .then((response) => {
-          console.log(response.data);
-          setUsers(response.data);
-        })
-      .catch((error) => {
-        console.error(error);
+      const response = await axios.get(import.meta.env.VITE_BACKEND_URL + '/api/users', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
+      console.log(response.data);
+      setUsers(response.data);
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      toast.error("Failed to fetch users");
     }
-  }
+  };
   
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+    useEffect(() => {
+      if (!token) {
+        toast.error("Please login to access users");
+        window.location.href = "/login"; // or navigate('/login') if using useNavigate
+      } else {
+        fetchUsers();
+      }
+    }, []);
 
   const handleDelete = async (id) => {
     toast((t) => (
@@ -36,7 +43,11 @@ const UserDetails = () => {
           onClick={async ()=>{
             toast.dismiss(t.id);
             try {
-              const response = await axios.delete(import.meta.env.VITE_BACKEND_URL + `/api/users/${id}`);
+              const response = await axios.delete(import.meta.env.VITE_BACKEND_URL + `/api/users/${id}`,{
+                headers: {
+                  Authorization: `Bearer ${token}`
+                }
+              });
               console.log(response.data);
               toast.success("User deleted successfully");
               fetchUsers();
