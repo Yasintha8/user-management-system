@@ -1,40 +1,54 @@
 import User from "../Models/UserModel.js";
 
 //--------Get all users-------
-export const getAllUsers = async (req, res, next) => {
-
-    try {
-        const users = await User.find();
-        if(users.length === 0) {
-            return res.status(404).json({ message: "No users found" }); //if no users
-        } 
-        else {
-            return res.status(200).json(users); 
-        }
-    } catch (error) {
-        console.log("Error fetching users:", error);
-        return res.status(500).json({ message: "Internal Server Error" });
-    }
-}
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find({ owner: req.user.id }); 
+    return res.status(200).json(users); 
+  } catch (error) {
+    console.log("Error fetching users:", error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
 
 //--------Create new user-------
-export const createUsers = async (req, res, next) => {
-    const { name, email, age, address } = req.body; //Insert data
+export const createUsers = async (req, res) => {
+  console.log("req.user in createUsers:", req.user);
 
-    if (!name || !email || !age || !address) {
-      return res.status(400).json({ error: "All fields are required." });
-    }
-    
-    try {
-        const users = new User({ name, email, age, address });
-        await users.save();
-        console.log("User added successfully");
-        return res.status(200).json({ message: "User added successfully" });
-    }catch (error) {
-        console.log(error);
-        return res.status(400).json({ message: "Unable to add user" });
-    }
-}
+  if (!req.user || !req.user.id) {
+    return res.status(401).json({ message: "Unauthorized: owner not found" });
+  }
+
+  const { name, email, age, address } = req.body;
+
+  if (!name || !email || !age || !address) {
+    return res.status(400).json({ error: "All fields are required." });
+  }
+
+  try {
+    const users = new User({
+      name,
+      email,
+      age,
+      address,
+      owner: req.user.id, // 
+    });
+
+    const savedUser = await users.save();
+    console.log("Saved User:", savedUser);
+
+    return res.status(201).json({
+      message: "User added successfully",
+      user: savedUser,
+    });
+  } catch (error) {
+    console.error("Error adding user:", error);
+    return res.status(500).json({ message: "Unable to add user", error });
+  }
+};
+
+
+
 
 //--------Get By Id------------
 export const getUserById = async (req, res, next) => {

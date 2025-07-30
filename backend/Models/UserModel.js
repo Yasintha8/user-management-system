@@ -17,7 +17,13 @@ const userSchema = new mongoose.Schema({
     address: {
         type: String,
         required: true
-    }
+    },
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "RegisterUser", // link to the registered user,
+        required: true
+  }
+
 });
 
 const User = mongoose.model("User", userSchema);
