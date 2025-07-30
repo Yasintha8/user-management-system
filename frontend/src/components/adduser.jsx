@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import axios from "axios";
 import {toast}  from "react-hot-toast";
 const Adduser = () => {
-
+    
     const navigate = useNavigate();
 
     const [name, setName] = useState('');
@@ -14,12 +14,19 @@ const Adduser = () => {
     const onsubmit = async (e) => {
         e.preventDefault();
         const data = { name, email, age, address }
-        
+
+        const token = localStorage.getItem("token"); // get token from localStorage
+        console.log("🚀 Sending token:", token); 
         try {
             const response = await axios.post(import.meta.env.VITE_BACKEND_URL + '/api/users', 
-              data
+              data,{
+                headers: {
+                  Authorization: `Bearer ${token}`
+                }
+              }
             );
             console.log("User added successfully :", response.data);
+            console.log("Token from localStorage:", localStorage.getItem("token"));
             toast.success("User added successfully");
             navigate('/user-details');
         } catch (error) {

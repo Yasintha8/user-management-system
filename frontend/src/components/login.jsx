@@ -28,6 +28,7 @@ const Login = () => {
 
       if (token && user) {
         login(user, token); // stores in localStorage and sets the context user
+        console.log("Token stored in localStorage:", token);
         toast.success("Login successful");
         navigate("/home");
       } else {

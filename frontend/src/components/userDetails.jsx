@@ -16,11 +16,11 @@ const UserDetails = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(response.data);
+      console.log(response.data || []);
       setUsers(response.data);
     } catch (error) {
       console.error(error);
-      toast.error("Failed to fetch users");
+      toast.error(error.response?.data?.message || "Something went wrong");
     }
   };
   
